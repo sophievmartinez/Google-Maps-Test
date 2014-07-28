@@ -13,8 +13,30 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 
     <script>
-
+		var map;
+		
+		
         function initialize() {
+			var mapOptions = {
+				zoom: 6,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+					
+			}
+			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			
+			navigator.geolocation.getCurrentPosition(function(position) {
+					var pos = new google.maps.LatLng (position.coords.latitude, position.coords.longitude);
+				
+				
+					var InfoWindow = new google.maps.InfoWindow({
+						map: map,
+						position: pos,
+						content: 'Here be awesome girls!!'
+					});
+					
+					map.setCenter(pos);
+			});
+			
 
         }
 
@@ -23,5 +45,6 @@
     </script>
   </head>
   <body>
+		<div id="map-canvas"></div>
   </body>
 </html>
